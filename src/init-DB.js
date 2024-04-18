@@ -23,4 +23,3 @@ let db = new sqlite3.Database('./cookbook.db', (err) => {
     }
 });
 
-db.close();

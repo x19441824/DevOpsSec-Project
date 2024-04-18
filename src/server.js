@@ -34,6 +34,21 @@ app.get('/favicon.ico', (req, res) => {
     res.sendFile('favicon.ico', { root: 'public' });
 });
 
+// Endpoint to search for recipes
+app.get('/search', (req, res) => {
+    let query = req.query.query;
+    db.all("SELECT * FROM recipes WHERE title LIKE ? OR ingredients LIKE ? OR description LIKE ?", [`%${query}%`, `%${query}%`, `%${query}%`], (err, rows) => {
+        if (err) {
+            res.status(400).json({"error": err.message});
+            return;
+        }
+        res.json({
+            "message": "success",
+            "data": rows
+        });
+    });
+});
+
 
 // Endpoint to add a new recipe
 app.post('/recipes', (req, res) => {
