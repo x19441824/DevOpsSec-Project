@@ -42,13 +42,19 @@ app.get('/search', (req, res) => {
             res.status(400).json({"error": err.message});
             return;
         }
-        res.json({
-            "message": "success",
-            "data": rows
-        });
+        if (rows.length === 0) {
+            res.json({
+                "message": "Recipe not found",
+                "data": []
+            });
+        } else {
+            res.json({
+                "message": "success",
+                "data": rows
+            });
+        }
     });
 });
-
 
 // Endpoint to add a new recipe
 app.post('/recipes', (req, res) => {
