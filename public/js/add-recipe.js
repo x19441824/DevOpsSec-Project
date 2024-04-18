@@ -1,15 +1,12 @@
-// Listen for form submission
 document.getElementById('recipeForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
-    // Get form values
     const title = document.getElementById('title').value;
     const description = document.getElementById('description').value;
     const ingredients = document.getElementById('ingredients').value;
     const preparation_time = document.getElementById('preparation_time').value;
     const difficulty = document.getElementById('difficulty').value;
 
-    // Create recipe object
     const recipeData = {
         title: title,
         description: description,
@@ -18,7 +15,6 @@ document.getElementById('recipeForm').addEventListener('submit', function(e) {
         difficulty: difficulty
     };
 
-    // Send POST request to save the recipe
     fetch('/recipes', {
         method: 'POST',
         headers: {
@@ -34,7 +30,7 @@ document.getElementById('recipeForm').addEventListener('submit', function(e) {
     })
     .then(data => {
         alert('Recipe added successfully!');
-        window.location.href = '/'; // Redirect to index page
+        window.location.href = '/';
     })
     .catch(error => {
         console.error('Error:', error);

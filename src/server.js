@@ -8,7 +8,6 @@ let db;
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-// Endpoint to get all recipes
 app.get('/recipes', (req, res) => {
     db.all("SELECT * FROM recipes", [], (err, rows) => {
         if (err) {
@@ -34,7 +33,6 @@ app.get('/favicon.ico', (req, res) => {
     res.sendFile('favicon.ico', { root: 'public' });
 });
 
-// Endpoint to search for recipes
 app.get('/search', (req, res) => {
     let query = req.query.query;
     db.all("SELECT * FROM recipes WHERE title LIKE ? OR ingredients LIKE ? OR description LIKE ?", [`%${query}%`, `%${query}%`, `%${query}%`], (err, rows) => {
@@ -56,7 +54,6 @@ app.get('/search', (req, res) => {
     });
 });
 
-// Endpoint to add a new recipe
 app.post('/recipes', (req, res) => {
     const { title, description, ingredients, preparation_time, difficulty } = req.body;
     const sql = 'INSERT INTO recipes (title, description, ingredients, preparation_time, difficulty) VALUES (?,?,?,?,?)';
@@ -74,7 +71,6 @@ app.post('/recipes', (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
-    // Connect to the SQLite database when the server starts
     db = new sqlite3.Database('./cookbook.db', sqlite3.OPEN_READWRITE, (err) => {
         if (err) {
             console.error(err.message);

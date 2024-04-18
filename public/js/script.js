@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function displayRecipes(recipes) {
     const container = document.getElementById('recipe-container');
-    container.innerHTML = ''; // Clear previous results
+    container.innerHTML = '';
 
     recipes.forEach(recipe => {
         const recipeElement = document.createElement('div');
@@ -22,7 +22,6 @@ function displayRecipes(recipes) {
     });
 }
 
-// Add this event listener for the search form
 document.getElementById('searchForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const query = document.getElementById('searchQuery').value;
@@ -76,7 +75,7 @@ document.getElementById('searchForm').addEventListener('submit', function(e) {
             if (data.message === "Recipe not found") {
                 displayMessage(data.message);
             } else {
-                displayRecipe(data.data[0]); // Display the first (and only) recipe from the array
+                displayRecipe(data.data[0]);
             }
         })
         .catch(error => {
