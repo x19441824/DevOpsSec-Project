@@ -1,52 +1,82 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 h1 {
     color: #333;
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 40px;
 }
 
 a {
     text-decoration: none;
     color: #007BFF;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0056b3;
 }
 
 #searchForm {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+    text-align: center;
 }
 
 #searchQuery {
-    padding: 10px;
-    width: 200px;
+    padding: 15px;
+    width: 300px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 25px;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    display: block;
+    margin: 0 auto;
 }
 
-#searchButton {
-    padding: 10px 20px;
+#searchForm button {
+    padding: 15px 30px;
     background-color: #007BFF;
     color: #fff;
     border: none;
     cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-size: 1.2em;
+    display: block;
+    margin: 0 auto;
+    box-shadow: 0px 0px 15px rgba(0, 123, 255, 0.3);
 }
 
-#searchButton:hover {
+#searchForm button:hover {
     background-color: #0056b3;
+    transform: scale(1.05);
 }
+
+
 
 #recipeForm {
-    width: 80%;
+    width: 60%;
     margin: auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
 }
 
 #recipeForm label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 15px;
     font-weight: bold;
+    font-size: 1.2em;
 }
 
 #recipeForm input[type="text"],
@@ -54,19 +84,40 @@ a {
 #recipeForm select,
 #recipeForm input[type="number"] {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
+    padding: 15px;
+    margin-bottom: 30px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 1em;
 }
 
 #add-recipe-button {
-    padding: 10px 20px;
+    padding: 15px 30px;
     background-color: #28a745;
     color: #fff;
     border: none;
     cursor: pointer;
+    border-radius: 25px;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease;
+}
+
+#add-recipe-button:hover {
+    background-color: #218838;
 }
 
 #recipe-container {
-    width: 80%;
+    width: 60%;
     margin: auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    #recipeForm,
+    #recipe-container {
+        width: 90%;
+    }
 }

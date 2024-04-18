@@ -5,6 +5,23 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => console.error('Error fetching recipes:', error));
 });
 
+function displayRecipes(recipes) {
+    const container = document.getElementById('recipe-container');
+    container.innerHTML = ''; // Clear previous results
+
+    recipes.forEach(recipe => {
+        const recipeElement = document.createElement('div');
+        recipeElement.innerHTML = `
+            <h3>${recipe.title}</h3>
+            <p>${recipe.description}</p>
+            <p>Ingredients: ${recipe.ingredients}</p>
+            <p>Prep Time: ${recipe.preparation_time} minutes</p>
+            <p>Difficulty: ${recipe.difficulty}</p>
+        `;
+        container.appendChild(recipeElement);
+    });
+}
+
 // Add this event listener for the search form
 document.getElementById('searchForm').addEventListener('submit', function(e) {
     e.preventDefault();
