@@ -11,3 +11,12 @@ describe('GET /recipes', () => {
   });
 
 });
+
+afterAll(async () => {
+  // Close the database connection
+  await new Promise((resolve) => {
+    sqliteDatabase.close(() => {
+      resolve();
+    });
+  });
+});
