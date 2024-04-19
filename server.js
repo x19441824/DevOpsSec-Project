@@ -80,3 +80,6 @@ app.listen(PORT, () => {
         }
     });
 });
+
+module.exports = app;  // `app` is the instance of your Express application
+

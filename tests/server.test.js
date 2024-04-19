@@ -1,6 +1,7 @@
-// tests/server.test.js
+
 const request = require('supertest');
-const app = require('server.js');
+const app = require('../server');
+
 
 describe('GET /recipes', () => {
   it('should fetch all recipes', async () => {
