@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
-  },
+    "test": "mocha -r esm test"
+  },  
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -14,7 +14,10 @@
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {
+    "chai": "^5.1.0",
+    "esm": "^3.2.25",
     "jest": "^29.7.0",
+    "mocha": "^10.4.0",
     "supertest": "^6.3.4"
   }
 }
