@@ -6,7 +6,8 @@ const sqlite3 = require('sqlite3').verbose();
 let db;
 
 app.use(bodyParser.json());
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
+
 
 app.get('/recipes', (req, res) => {
     db.all("SELECT * FROM recipes", [], (err, rows) => {
