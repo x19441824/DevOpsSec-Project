@@ -1,28 +1,40 @@
 const request = require('supertest');
-const app = require('../server.js');
+const { app, closeDatabase } = require('../server.js');
 
 describe('Server API Tests', () => {
   let server;
 
-  beforeAll((done) => {
+  // Start the server before any tests run with a timeout
+  beforeAll(done => {
     server = app.listen(4000, () => {
       console.log('Server started for testing.');
       done();
     });
-  });
+  }, 10000); // Timeout set to 10 seconds
 
-  afterAll((done) => {
-    if (server) {
-      server.close(() => {
+  // Close the server and database after the tests are done with a timeout
+  afterAll(done => {
+    // Close the server first
+    server.close(async (err) => {
+      if (err) {
+        console.error('Failed to close the server:', err);
+        done(err);
+      } else {
         console.log('Server closed for testing.');
-        done();
-      });
-    } else {
-      console.log('No server to close.');
-      done();
-    }
-  });
+        // Then close the database if it's open
+        try {
+          await closeDatabase();
+          console.log('Database connection closed.');
+          done();
+        } catch (dbErr) {
+          console.error('Failed to close the database connection:', dbErr);
+          done(dbErr);
+        }
+      }
+    });
+  }, 10000); // Timeout set to 10 seconds
 
+  // Each test also has its own timeout
   test('GET /recipes should fetch all recipes', (done) => {
     request(app)
       .get('/recipes')
@@ -32,7 +44,7 @@ describe('Server API Tests', () => {
         expect(res.body.data).toBeInstanceOf(Array);
         done();
       });
-  });
+  }, 10000); // Timeout set to 10 seconds
 
   test('GET /search should search recipes by a term', (done) => {
     const searchTerm = 'chocolate';
@@ -43,7 +55,7 @@ describe('Server API Tests', () => {
         if (err) return done(err);
         done();
       });
-  });
+  }, 10000); // Timeout set to 10 seconds
 
   test('POST /recipes should add a new recipe', (done) => {
     const newRecipe = {
@@ -63,5 +75,5 @@ describe('Server API Tests', () => {
         expect(res.body.message).toBe('success');
         done();
       });
-  });
+  }, 10000); // Timeout set to 10 seconds
 });

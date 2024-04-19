@@ -3,10 +3,15 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = 3000;
 const sqlite3 = require('sqlite3').verbose();
-let db;
+let db = new sqlite3.Database('./cookbook.db', sqlite3.OPEN_READWRITE, (err) => {
+    if (err) {
+      console.error(err.message);
+    }
+  });
 
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
+
 
 
 app.get('/recipes', (req, res) => {
@@ -83,3 +88,15 @@ app.listen(PORT, () => {
 
 module.exports = app;  // `app` is the instance of your Express application
 
+function closeDatabase() {
+    return new Promise((resolve, reject) => {
+      db.close((err) => {
+        if (err) reject(err);
+        else resolve();
+      });
+    });
+  }
+  
+  // Export the close function
+  module.exports = { app, closeDatabase };
+  
